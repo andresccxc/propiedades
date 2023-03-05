@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { StandaloneSearchBox, LoadScript } from "@react-google-maps/api";
 import Modal from "react-modal";
 import { Input } from "../input";
 import { modalStyles } from ".";
 
 const defaultProperty = {
-  location: "",
+  location: { name: "", coordinates: {} },
   type: "",
   phone: "",
   price: "",
@@ -13,9 +14,23 @@ const defaultProperty = {
 };
 
 export const PostProperty = ({ showModal, toggleModal }) => {
+  const inputRef = useRef();
   const [property, setProperty] = useState(defaultProperty);
 
   const { location, type, phone, price, neighborhood, image } = property;
+
+  const handlePlaceChanged = () => {
+    const [place] = inputRef.current.getPlaces();
+    if (place) {
+      setProperty({
+        ...property,
+        location: {
+          name: place.formatted_address,
+          coordinates: place.geometry.location,
+        },
+      });
+    }
+  };
 
   const handleChange = ({ target }) => {
     setProperty({ ...property, [target.name]: target.value });
@@ -34,12 +49,12 @@ export const PostProperty = ({ showModal, toggleModal }) => {
           type="button"
           onClick={closeModal}
         >
-          <i class="fa-sharp fa-solid fa-circle-xmark text-primary text-2xl cursor-pointer" />
+          <i className="fa-sharp fa-solid fa-circle-xmark text-primary text-2xl cursor-pointer" />
         </button>
         <h3 className="text-gray-500 text-2xl font-bold mb-8 text-center">
           Publicar propiedad
         </h3>
-        <div className="flex flex-col gap-5 mb-8">
+        <div className="flex flex-col gap-5">
           <Input
             label="Tipo de inmueble"
             name="type"
@@ -78,6 +93,21 @@ export const PostProperty = ({ showModal, toggleModal }) => {
             handleChange={handleChange}
             value={image}
           />
+          <LoadScript
+            googleMapsApiKey={import.meta.env.VITE_MAP_KEY}
+            libraries={["places"]}
+          >
+            <StandaloneSearchBox
+              onLoad={(ref) => (inputRef.current = ref)}
+              onPlacesChanged={handlePlaceChanged}
+            >
+              <input
+                type="text"
+                className="input w-full relative bottom-4"
+                placeholder="Selecciona la ubicación"
+              />
+            </StandaloneSearchBox>
+          </LoadScript>
         </div>
         <button className="border rounded-full px-5 py-1.5 text-white bg-primary flex gap-2 items-center font-light mx-auto">
           Guardar

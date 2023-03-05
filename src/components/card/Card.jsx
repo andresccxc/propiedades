@@ -1,5 +1,5 @@
 const images = [
-  // "https://images.ciencuadras.com/eyJidWNrZXQiOiJ3d3ctaW1nLWNjIiwia2V5IjoicHJveWVjdG8vMjM3MTkyLVA4MjQvdGlwb3MvU0FMT04tREUtSlVFR09TLUZJSk8tbWluMTYxMzc1NzI1MzY5X3BsYW5hLmpwZWciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjI5MCwiaGVpZ2h0IjoxNjAsImZpdCI6ImNvdmVyIn19fQ==",
+  "https://images.ciencuadras.com/eyJidWNrZXQiOiJ3d3ctaW1nLWNjIiwia2V5IjoicHJveWVjdG8vMjM3MTkyLVA4MjQvdGlwb3MvU0FMT04tREUtSlVFR09TLUZJSk8tbWluMTYxMzc1NzI1MzY5X3BsYW5hLmpwZWciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjI5MCwiaGVpZ2h0IjoxNjAsImZpdCI6ImNvdmVyIn19fQ==",
   "https://images.ciencuadras.com/eyJidWNrZXQiOiJ3d3ctaW1nLWNjIiwia2V5IjoicHJveWVjdG8vMjM3MjUyLVA4ODkvdGlwb3MvaW5pY2lvMTYzNTI2NzI1MDkyX3BsYW5hLnBuZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MzUwLCJoZWlnaHQiOjE2MCwiZml0IjoiY292ZXIifX19",
 ];
 const defaultImage =
@@ -8,10 +8,11 @@ export const Card = ({ index }) => {
   return (
     <div className="card w-64 shadow-lg rounded-lg overflow-hidden">
       <img
-        className="card-image"
+        className="card__image w-full"
         src={images[index] || defaultImage}
         alt="property"
       />
+      {/* <div className="card_"> */}
       <div className="card__body px-4 pt-4 pb-2.5">
         <small className="text-gray-500 text-xs">Desde:</small>
         <p className="font-semibold text-xl">$150.000.000</p>

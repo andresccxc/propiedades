@@ -1,6 +1,7 @@
 $primary-color: #097ab2;
 
-.input {
+.input,
+#address {
   @apply rounded-md border outline-none px-4 py-1.5 text-sm;
 
   line-height: 1;
@@ -14,8 +15,6 @@ $primary-color: #097ab2;
 
   &__container {
     @apply relative flex flex-col;
-
-    // min-width: 25rem;
 
     &:focus-within label {
       @apply text-primary bg-white;
@@ -37,4 +36,32 @@ $primary-color: #097ab2;
     line-height: 1;
     left: 1rem;
   }
+}
+.autocomplete {
+  label {
+    @apply hidden;
+
+    &:first-of-type {
+      @apply block text-sm;
+
+      
+    }
+  }
+
+  button {
+    @apply hidden;
+  }
+
+  #address {
+    @apply mt-1;
+  }
+}
+
+#addressName,
+#street,
+#city,
+#country,
+#postCode {
+  @apply hidden;
+  background-color: red !important;
 }

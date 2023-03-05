@@ -3,9 +3,10 @@ import { Card } from "./components/card";
 import { Footer } from "./components/footer";
 import { Header } from "./components/header";
 import { Login } from "./components/login";
+import { Map } from "./components/map";
 import { PostProperty } from "./components/post-property";
 
-const items = [1, 2, 3, 4, 5, 6, 7, 8];
+const items = [1, 2, 3, 4, 5, 6];
 
 function App() {
   const [modal, setModal] = useState({ login: false, postProperty: false });
@@ -28,7 +29,7 @@ function App() {
             ))}
           </section>
         </div>
-        <section className="flex-1">mapa</section>
+        <section className="flex-1">{!modal.postProperty && <Map />}</section>
       </main>
       <Footer />
       <Login showModal={modal.login} toggleModal={toggleModal} />

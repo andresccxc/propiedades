@@ -37,3 +37,11 @@ button {
     max-width: 55rem;
   }
 }
+
+.card {
+  max-height: 19.375rem;
+
+  &__image {
+    height: 8.125rem;
+  }
+}
