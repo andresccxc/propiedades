@@ -1,7 +1,7 @@
-$primary-color: #097ab2;
+@import "../../index.scss";
 
 .input {
-  @apply rounded-md border outline-none text-base px-4 py-1.5 text-sm;
+  @apply rounded-md border outline-none px-4 py-1.5 text-sm;
 
   line-height: 1;
   box-shadow: none;

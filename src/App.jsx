@@ -10,7 +10,6 @@ import { PostProperty } from "./components/post-property";
 import { PropertyContext } from "./context/PropertyProvider";
 import "react-toastify/dist/ReactToastify.css";
 
-const items = [1, 2, 3, 4, 5, 6];
 Modal.setAppElement("#root");
 function App() {
   const [modal, setModal] = useState({ auth: false, postProperty: false });

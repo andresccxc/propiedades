@@ -1,5 +1,4 @@
-$primary-color: #097ab2;
-$dark-blue: #06689a;
+@import "../../index.scss";
 
 .header {
   @apply shadow-md py-5 px-10 flex items-center justify-between;

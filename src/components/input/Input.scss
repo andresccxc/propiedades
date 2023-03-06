@@ -1,4 +1,4 @@
-$primary-color: #097ab2;
+@import "../../index.scss";
 
 .input,
 #address {
@@ -43,8 +43,6 @@ $primary-color: #097ab2;
 
     &:first-of-type {
       @apply block text-sm;
-
-      
     }
   }
 
