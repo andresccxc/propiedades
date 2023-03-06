@@ -1,3 +1,3 @@
 export * from "./Header.jsx";
 
-export const PROPERTY_CATEGORIES = ["Fincas", "Lotes", "Viviendas"];
+export const PROPERTY_TYPES = ["Fincas", "Lotes", "Viviendas"];

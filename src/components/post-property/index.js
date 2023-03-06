@@ -11,3 +11,12 @@ export const modalStyles = {
     boxShadow: "0px 0px 5px 1px rgba(184,184,191,1)",
   },
 };
+
+export const defaultProperty = {
+  location: { name: "", coordinates: {} },
+  type: "Viviendas",
+  phone: "",
+  price: "",
+  neighborhood: "",
+  image: "",
+};
