@@ -4,14 +4,38 @@ import { AuthContext } from "../../context/AuthProvider";
 import { PropertyContext as context } from "../../context/PropertyProvider";
 import { PROPERTY_TYPES } from ".";
 import "./Header.scss";
+import { getInstructions, setInstructions } from "../../utils/modal";
 
-export const Header = ({ setAuthModal, toggleModal }) => {
+export const Header = ({
+  setAuthModal,
+  toggleModal,
+  setCurrentInstruction,
+}) => {
   const { closeSession, user } = useContext(AuthContext);
   const { location, setLocation, types, toggleTypes } = useContext(context);
+  const instructions = getInstructions();
 
   const showAppModal = (authModal) => {
     toggleModal("auth");
     setAuthModal(authModal);
+  };
+
+  const openPostModal = () => {
+    if (!instructions?.post) {
+      setCurrentInstruction("post");
+      setInstructions({ ...instructions, post: true });
+      return toggleModal("instructions");
+    }
+    toggleModal("postProperty");
+  };
+
+  const filterByType = (type) => {
+    if (!instructions?.types) {
+      setInstructions({ ...instructions, types: true });
+      setCurrentInstruction("types");
+      return toggleModal("instructions");
+    }
+    toggleTypes(type);
   };
 
   return (
@@ -27,7 +51,7 @@ export const Header = ({ setAuthModal, toggleModal }) => {
             className={`header__filtering-button ${
               types.includes(item) ? "bg-primary text-white" : ""
             }`}
-            onClick={() => toggleTypes(item)}
+            onClick={() => filterByType(item)}
           >
             {item}
           </button>
@@ -38,7 +62,7 @@ export const Header = ({ setAuthModal, toggleModal }) => {
           <>
             <button
               className="border rounded-full px-5 py-1.5 text-white bg-primary flex gap-2 items-center font-light"
-              onClick={() => toggleModal("postProperty")}
+              onClick={openPostModal}
             >
               Publicar
               <i className="fa-solid fa-bag-shopping" />
