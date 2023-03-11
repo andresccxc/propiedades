@@ -8,18 +8,21 @@ import { Auth } from "./components/auth";
 import { Map } from "./components/map";
 import { PostProperty } from "./components/post-property";
 import { PropertyContext } from "./context/PropertyProvider";
+import { AuthContext } from "./context/AuthProvider";
 import { InstructionModal } from "./components/instruction-modal";
 import { getInstructions, MODALS, setInstructions } from "./utils/modal";
 import { getUser } from "./utils/auth";
 import "react-toastify/dist/ReactToastify.css";
 
 Modal.setAppElement("#root");
+
 function App() {
   const [modal, setModal] = useState(MODALS);
   const [authModal, setAuthModal] = useState("login");
   const [currentInstruction, setCurrentInstruction] = useState("register");
 
   const { properties } = useContext(PropertyContext);
+  const { session } = useContext(AuthContext);
 
   const [instructions, user] = [getInstructions(), getUser()];
 
@@ -33,10 +36,22 @@ function App() {
 
   useEffect(() => {
     if (!instructions) {
-      setInstructions({ register: false, post: false, types: false });
+      setInstructions({
+        register: false,
+        post: false,
+        types: false,
+        search: false,
+      });
     }
     if (isNewUser()) setModal({ ...modal, instructions: true });
   }, []);
+
+  useEffect(() => {
+    if (session && !instructions?.post) {
+      toggleModal("instructions");
+      setCurrentInstruction("post");
+    }
+  }, [session]);
 
   return (
     <div className="h-screen flex flex-col">

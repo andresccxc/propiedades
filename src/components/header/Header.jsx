@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { SearchInput } from "../search-input";
 import { AuthContext } from "../../context/AuthProvider";
 import { PropertyContext as context } from "../../context/PropertyProvider";
@@ -20,15 +20,6 @@ export const Header = ({
     setAuthModal(authModal);
   };
 
-  const openPostModal = () => {
-    if (!instructions?.post) {
-      setCurrentInstruction("post");
-      setInstructions({ ...instructions, post: true });
-      return toggleModal("instructions");
-    }
-    toggleModal("postProperty");
-  };
-
   const filterByType = (type) => {
     if (!instructions?.types) {
       setInstructions({ ...instructions, types: true });
@@ -38,12 +29,21 @@ export const Header = ({
     toggleTypes(type);
   };
 
+  const doFirstSearch = () => {
+    if (!instructions?.search) {
+      setInstructions({ ...instructions, search: true });
+      toggleModal("instructions");
+      setCurrentInstruction("search");
+    }
+  };
+
   return (
     <header className="header">
       <section className="flex items-center gap-4">
         <SearchInput
           value={location}
           handleChange={({ target }) => setLocation(target.value)}
+          onClick={doFirstSearch}
         />
         {PROPERTY_TYPES.map((item) => (
           <button
@@ -62,7 +62,7 @@ export const Header = ({
           <>
             <button
               className="border rounded-full px-5 py-1.5 text-white bg-primary flex gap-2 items-center font-light"
-              onClick={openPostModal}
+              onClick={() => toggleModal("postProperty")}
             >
               Publicar
               <i className="fa-solid fa-bag-shopping" />

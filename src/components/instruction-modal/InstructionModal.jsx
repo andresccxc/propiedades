@@ -1,7 +1,7 @@
 import React from "react";
 import Modal from "react-modal";
 import { setInstructions } from "../../utils/modal";
-import { Register, Post, Types } from "./components";
+import { Register, Post, Types, Search } from "./components";
 import { modalStyles } from ".";
 
 export const InstructionModal = ({
@@ -15,12 +15,22 @@ export const InstructionModal = ({
     toggleModal("auth");
   };
 
+  const openAuthModal = (modal) => {
+    setAuthModal(modal);
+    toggleModal("auth");
+  };
+
   const component = {
     register: (
-      <Register toggleModal={toggleModal} goToRegister={goToRegister} />
+      <Register
+        toggleModal={toggleModal}
+        goToRegister={goToRegister}
+        openAuthModal={openAuthModal}
+      />
     ),
     post: <Post toggleModal={toggleModal} />,
     types: <Types toggleModal={toggleModal} />,
+    search: <Search toggleModal={toggleModal} />,
   };
 
   return (
